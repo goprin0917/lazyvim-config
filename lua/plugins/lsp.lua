@@ -6,6 +6,9 @@ return {
         intelephense = {
           settings = {
             intelephense = {
+              format = {
+                enable = false,
+              },
               stubs = {
                 "apache",
                 "bcmath",
@@ -33,6 +36,9 @@ return {
               environment = {
                 phpVersion = "8.5",
               },
+            },
+            format = {
+              enable = false,
             },
           },
         },
