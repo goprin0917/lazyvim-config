@@ -6,6 +6,9 @@ return {
         php = { "pint" },
         blade = { "prettier" },
         go = { "goimports", "gofumpt" },
+        vue = { "oxfmt" },
+        javascript = { "oxfmt" },
+        typescript = { "oxfmt" },
       },
       formatters = {
         pint = {
@@ -18,11 +21,17 @@ return {
             return "pint"
           end,
         },
+        oxfmt = {
+          command = "npx",
+          args = { "oxfmt", "--stdin-filepath", "$FILENAME" },
+          stdin = true,
+          cwd = require("conform.util").root_file({ "package.json" }),
+        },
       },
     },
     init = function()
       vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = { "*.php" },
+        pattern = { "*.php", "*.vue" },
         callback = function(args)
           require("conform").format({ bufnr = args.buf, timeout_ms = 2000 })
         end,
